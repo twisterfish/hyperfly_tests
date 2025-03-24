@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>HyperFly Interface Utility Page</title>
+<link rel="StyleSheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="scripts/json-min.js"></script>
+<script type="text/javascript" src="scripts/BubbleTooltips.js"></script>
+<script type="text/javascript" src="scripts/parse.js"></script>
+<script type="text/javascript" src="scripts/ed_hyperfly.js"></script>
+<!--[if lt IE 7]>
+<script defer type="text/javascript" src="scripts/pngfix.js"></script>
+<![endif]-->
+
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+</head>
+<body id="body" onmouseover="stopFocus();">
+<a name="_top" class="noa"></a>
+
+<div class="header">
+<img src="images/logo.png" alt="hyperfly_interface" />
+</div>
+
+<div>
+	<h4>Required Fields:</h4>
+	<ul>
+		<li><strong>ver:</strong> The version of the API being accessed(currently not used)</li>
+		<li><strong>path:</strong> The business path for processing. (revolution, ct group, etc.)</li>
+		<li><strong>type:</strong> Type of message. This will call the proper processing component on it.</li>
+		<li><strong>token:</strong> Security key returned after login. It is required for most calls.</li>
+	</ul>
+	<h4>Test Messages.</h4>
+    <ul>
+        <li>{"ver": "1.1.0","path": "core","type": "getInstanceID"}</li>
+        <li>{"ver": "1.1.0","path": "core","type": "statusVersion"}</li>
+        <li>{"ver":"1.1.0","path":"model","type":"registerUser","email":"somebody1@whatever.com","pass":"mypasswordforwhatever"}</li>
+        <li>{"ver":"1.1.0","path":"model","type":"login","user":"somebody1@whatever.com","pass":"mypasswordforwhatever"}</li>
+    </ul>
+    <hr />
+    <div class="jrhfloat">
+    	<h3>HyperFly API Request:</h3>
+    </div>
+</div>
+
+<div class="mainbody">
+   <div id="bodywrap" class="bodywrap"></div>
+ 
+	<form id="hyperfly_form">
+		<div id="inputcontainer">
+			<textarea id="hyperfly_field" name="hyperfly_request" rows="10"></textarea>
+		</div>
+		<div class="clear"></div>
+      	<div class="clear"></div>
+		<div class="lfloat">
+			<button type="button" id="hyperfly_button"onclick="hyperfly_api_call('hyperfly_form','hyperfly_field','text')">Send JSON Request</button>
+		</div>
+		<div class="clear"></div>
+		<div class="jrhfloat">
+			<h3>HyperFly API Response:</h3>
+		</div>
+	</form>
+
+	<form onsubmit="doParse(); return false;">
+		<div id="inputcontainer">
+			<textarea id="text" rows="8"></textarea>
+		</div>
+      	<div class="clear"></div>
+      	<div class="clear"></div>
+      	<div class="lfloat">
+      		<input type="submit" id="submit" value="Beautify JSON" onclick="doParse(); return false;" />
+      	</div>
+      	<div class="rfloat">
+      		<input type="button" id="help" value="help" onclick="doHelp();" />
+      	</div>
+      	<div class="clear"></div>
+      	<hr />
+      		<a name="_output" class="noa">
+      		</a>
+      	<div id="stats" class="stats"></div>
+      	<div id="output" class="output"></div>
+	</form>
+   
+   
+    <div id="desc" class="desc">
+		<p><h3>Syntax Highlighting:</h3>
+		<span class='string'>Colour for text and null values.</span><br />
+		<span class='number'>Colour for numbers.</span><br />
+      	<span class='boolean'>Colour for true and false values.</span><br />
+      	<span class='void'>Colour for void values.</span><br />
+      	<img class="ex" src="images/object.png" /> Background for Objects.<br />
+      	<img class="ex" src="images/array.png" /> Background for Arrays.<br />
+      	<img class="ex" src="images/objectt.png" /> Background for Object name/value pair tables.<br />
+      	<img class="ex" src="images/arrayt.png" /> Background for Array value tables.</p>
+      	<p><h3>dependencies</h3>
+	      This page uses the JSON JavaScript <a href="http://www.json.org/js.html">parsing library</a>.</p>
+      	<p class="closep"><input type="button" onclick="hideHelp();" value="close" /></p>
+   </div>
+   
+</body>
+</html>
